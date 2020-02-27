@@ -440,9 +440,7 @@ event. The [DownloadItem](download-item.md) will not have any `WebContents` asso
 the initial state will be `interrupted`. The download will start only when the
 `resume` API is called on the [DownloadItem](download-item.md).
 
-#### `ses.clearAuthCache(options)`
-
-* `options` ([RemovePassword](structures/remove-password.md) | [RemoveClientCertificate](structures/remove-client-certificate.md))
+#### `ses.clearAuthCache()`
 
 Returns `Promise<void>` - resolves when the session’s HTTP authentication cache has been cleared.
 
@@ -484,6 +482,10 @@ By default Electron will download hunspell dictionaries from the Chromium CDN.  
 behavior you can use this API to point the dictionary downloader at your own hosted version of the hunspell
 dictionaries.  We publish a `hunspell_dictionaries.zip` file with each release which contains the files you need
 to host here.
+
+If the files present in `hunspell_dictionaries.zip` are available at `https://example.com/dictionaries/language-code.bdic`
+then you should call this api with `ses.setSpellCheckerDictionaryDownloadURL('https://example.com/dictionaries/')`.  Please
+note the trailing slash.  The URL to the dictionaries is formed as `${url}${filename}`.
 
 **Note:** On macOS the OS spellchecker is used and therefore we do not download any dictionary files.  This API is a no-op on macOS.
 
@@ -584,6 +586,10 @@ code to the `setSpellCheckerLanaguages` API that isn't in this array will result
 #### `ses.cookies` _Readonly_
 
 A [`Cookies`](cookies.md) object for this session.
+
+#### `ses.serviceWorkers` _Readonly_
+
+A [`ServiceWorkers`](service-workers.md) object for this session.
 
 #### `ses.webRequest` _Readonly_
 
