@@ -1,6 +1,7 @@
 const { app } = require('electron')
 
 app.commandLine.appendSwitch('--disable-software-rasterizer')
+app.commandLine.appendSwitch('--no-delay-for-dx12-vulkan-info-collection')
 
 app.whenReady().then(() => {
   const infoType = process.argv.pop()
