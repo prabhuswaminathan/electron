@@ -1146,6 +1146,11 @@ void NativeWindowMac::SetKiosk(bool kiosk) {
         NSApplicationPresentationDisableSessionTermination |
         NSApplicationPresentationDisableHideApplication;
     [NSApp setPresentationOptions:options];
+    NSDictionary* optionDict = [NSDictionary
+        dictionaryWithObject:[NSNumber numberWithInt:options]
+                      forKey:NSFullScreenModeApplicationPresentationOptions];
+    [[window_ contentView] enterFullScreenMode:[NSScreen mainScreen]
+                                   withOptions:optionDict];
     is_kiosk_ = true;
     was_fullscreen_ = IsFullscreen();
     if (!was_fullscreen_)
